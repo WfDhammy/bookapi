@@ -1,4 +1,5 @@
 from django.urls import path
+from .user.views import LoginView, SignupView, UserProfileView
 from .views import main, authors, get_author, create_author, delete_author, update_author, courses, create_course, update_course, get_course, delete_course
 
 
@@ -15,4 +16,7 @@ urlpatterns = [
     path('course/create', create_course, name="create course"),
     path('course/delete/<uuid:id>', delete_course, name="delete course"),
     path('course/update/<uuid:id>', update_course, name="update course"),
+    path('login/', LoginView.as_view(), name='login'),
+    path('signup/', SignupView.as_view(), name='signup'),
+    path('profile/', UserProfileView.as_view(), name='profile'),
 ]
