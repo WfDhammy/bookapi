@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Welcome <span id="username">Username</span>
+    <script>
+        const user_username = document.getElementById("username")
+        const username = localStorage.getItem("username")
+        if (username) {
+            document.getElementById("username").textContent = username;
+        }
+
+    </script>
+    <script>
+        function authenticate() {
+            const accessToken = localStorage.getItem("access_token")
+            if (!accessToken) {
+                alert("Please log in first");
+                window.location.href = "index.html";
+                return;
+            }
+        }
+        window.onload = authenticate();
+    </script>
+</body>
+</html>
