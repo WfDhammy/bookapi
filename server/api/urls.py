@@ -1,7 +1,7 @@
 from django.urls import path
 from .user.views import LoginView, SignupView, UserProfileView
 from .views import main, authors, get_author, create_author, delete_author, update_author, courses, create_course, update_course, get_course, delete_course
-
+from .user.google import GoogleLoginView
 
 
 urlpatterns = [
@@ -19,4 +19,5 @@ urlpatterns = [
     path('login/', LoginView.as_view(), name='login'),
     path('signup/', SignupView.as_view(), name='signup'),
     path('profile/', UserProfileView.as_view(), name='profile'),
+    path("google/auth/", GoogleLoginView.as_view(), name="google auth"),
 ]

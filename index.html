@@ -37,14 +37,8 @@
 
     <!-- Sign in with Google Button -->
     <div class="mt-4">
-        <div id="google-signin-button">
-          <button type="button" class="w-full py-2 px-4 bg-white text-gray-800 font-semibold rounded-lg border border-gray-300 flex items-center justify-center gap-3 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500">
-            <img src="https://www.svgrepo.com/show/355037/google.svg" alt="Google logo" class="w-5 h-5" />
-            <span>Continue with Google</span>
-          </button>
-        </div>
+      <div id="google-signin-button"></div>
     </div>
-  
 
     <!-- Link to Register Page -->
     <div class="mt-4 text-center">
@@ -88,7 +82,7 @@
           alert("An error occurred. Please try again.");
         }
       } else {
-        alert("Passwords do not match!");
+        alert("Please enter both username and password.");
       }
     }
 
@@ -97,7 +91,7 @@
       const id_token = googleUser.getAuthResponse().id_token;
 
       // Send the ID token to the backend to authenticate the user
-      fetch('http://127.0.0.1:8000/google-login', {
+      fetch('http://127.0.0.1:8000/google-login/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -126,8 +120,19 @@
       });
     }
 
+    // Initialize Google Sign-In button
+    function renderGoogleButton() {
+      google.accounts.id.initialize({
+        client_id: '629771282612-nm165evt6ag94q1vaucf0851php84fd5.apps.googleusercontent.com',  // Replace with your actual Google Client ID
+        callback: handleGoogleSignIn,
+      });
+      google.accounts.id.renderButton(
+        document.getElementById('google-signin-button'),
+        { theme: 'outline', size: 'large' }
+      );
+    }
 
-  
+    window.onload = renderGoogleButton;
   </script>
 
 </body>
